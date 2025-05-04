@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      background: #000;
+    }
+
+    h1, p {
+      text-align: center;
+      margin-top: 20px;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px 20px;
+      overflow-x: auto;
+    }
+
+    .card {
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 250px;
+      padding: 10px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      border: 2px solid #ffffff33;
+      flex-shrink: 0;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,1.0);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    a {
+      color: #f1c40f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #main-page {
+      background: linear-gradient(to right, #7b2ff7, #f107a3);
+      min-height: 100vh;
+      animation: gradientBG 3s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .profile {
+      display: none;
+      height: 100vh;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .profile.active {
+      display: block;
+      opacity: 1;
+    }
+
+    #profile-page {
+      background: linear-gradient(-45deg, #1b1b3a, #6930c3, #ffa600, #00f5d4);
+      background-size: 500% 500%;
+      animation: profileBG 7s ease infinite;
+    }
+
+    @keyframes profileBG {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: row;
+      max-width: 1200px;
+      margin: 60px auto;
+      border-radius: 12px;
+      overflow: hidden; 
+      background-color: #000;
+      border: 3px solid #fff;
+    }
+
+    .left {
+      flex: 1;
+      position: relative;
+    }
+
+    .left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .right {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #eee;
+      background-color: #000;
+    }
+
+    .section {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 15px;
+    }
+
+    h3 {
+      color: #f107a3;
+      margin-bottom: 10px;
+    }
+
+    .right p, .right li {
+      color: #ccc;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .back-link a {
+      font-weight: bold;
+      color: #7b2ff7;
+    }
+
+    .social a {
+      display: inline-block;
+      margin-right: 15px;
+      color: #f107a3;
+    }
+
+    @media (max-width: 1300px) {
+      .container {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        width: 220px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .card {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .profile-container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .left img {
+        height: 300px;
+      }
+
+      .right {
+        border-radius: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        width: 100%;
+      }
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Page -->
+  <div id="main-page">
+    <h1>Meet The Team! 👋🚀</h1>
+    <p>Click on the name of the person to learn more about them. 💻🎨</p>
+
+    <div class="container">
+      <div class="card" onclick="showProfile('Akshitha')">
+        <img src="akshitha.jpg" alt="Akshitha">
+        <p>AKSHITHA 💻</p>
+      </div>
+      <div class="card" onclick="showProfile('Dhamini')">
+        <img src="Dhamani.jpg" alt="Dhamini">
+        <p> DHAMINI 🎨</p>
+      </div>
+      <div class="card" onclick="showProfile('Harini')">
+        <img src="harini.jpg" alt="Harini">
+        <p>HARINI 📊</p>
+      </div>
+      <div class="card" onclick="showProfile('Bhanu')">
+        <img src="Chary.jpg" alt="Bhanu">
+        <p>BHANU PRASAD CHARY 👨‍💻</p>
+      </div>
+      <div class="card" onclick="showProfile('Nikhil')">
+        <img src="nikhil.jpg" alt="Nikhil">
+        <p>NIKHILESHWAR REDDY 🎯</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Page -->
+  <div id="profile-page" class="profile">
+    <div class="profile-container">
+      <div class="left">
+        <img id="profile-img" src="" alt="Profile Image">
+        <div class="overlay">
+          <h2 id="profile-name"></h2>
+        </div>
+      </div>
+      <div class="right">
+        <div class="section">
+          <h3>About Me</h3>
+          <p id="profile-about"></p>
+        </div>
+
+        <div class="section">
+          <h3>Skills</h3>
+          <ul id="profile-skills"></ul>
+          <ul id="profile-skills"></ul>
+        </div>
+
+        <div class="section">
+          <h3>Contact</h3>
+          <p>Email: <a id="profile-email" href="#"></a></p>
+        </div>
+
+        <div class="section social">
+          <h3>Social Media</h3>
+          <a id="profile-linkedin" href="#" target="_blank">LinkedIn</a>
+          <a id="profile-instagram" href="#" target="_blank">Instagram</a>
+          <a id="profile-codechef" href="#" target="_blank">CodeChef</a>
+        </div>
+
+        <p class="back-link"><a href="#" onclick="showMain()">← Back to Team</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const profiles = {
+      Akshitha: {
+        name: "Akshitha",
+        img: "akshitha.jpg",
+        about: "Hello! I'm Akshitha, a creative thinker with a passion for front-end development. I love designing sleek, user-friendly interfaces and bringing ideas to life through code",
+        skills: ["JavaScript", "React", "UI/UX Design"],
+        email: "2420080024@klh.edu.in",
+        instagram: "https://www.instagram.com/sai_akshitha_2006?igsh=MW91YzQwZXUweGZreg==",
+        codechef: "https://www.codechef.com/users/akshitha_80024"
+      },
+      Dhamini: {
+        name: "Dhamini",
+        img: "Dhamani.jpg",
+        about: "Hi, I'm Dhamini! As a designer, I enjoy blending creativity with clean coding practices. I focus on building engaging, interactive websites and mobile apps",
+        skills: ["HTML & CSS", "Illustrator", "Java", "Photoshop"],
+        email: "2420080022@klh.edu.in",
+        instagram: "https://www.instagram.com/dhamini.nalluri/?igsh=c2x1bGMyNm96YWdu#",
+        codechef: "https://www.codechef.com/users/dhamini_80022"
+      },
+      Harini: {
+        name: "Harini",
+        img: "harini.jpg",
+        about: "Hi, I'm Harini! I specialize in graphic design and coding to make ideas visually appealing and functional. I’m always exploring new design trends and innovative solutions",
+        skills: ["HTML & CSS", "Graphic Design", "Java"],
+        email: "2420080036@klh.edu.in",
+        instagram: "https://www.instagram.com/harinireddy27/?igsh=ZTF4OXNhaTJ6ZjYy#",
+        codechef: "https://www.codechef.com/users/harine_80036"
+      },
+      Bhanu: {
+        name: "Bhanu",
+        img: "Chary.jpg",
+        about: "Hello! I’m Bhanu, an explorer of technology with a love for data science and machine learning. I thrive on solving complex problems using data-driven solutions." ,
+        skills: ["Python", "Machine Learning", "Data Visualization"],
+        email: "2420080034@klh.edu.in",
+        linkedin: "https://www.linkedin.com/in/bhanu-prasad-chary-992001330/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        instagram: "https://www.instagram.com/a_boy_called_bhanu/",
+        codechef: "https://www.codechef.com/users/top_chary_01"
+      },
+      Nikhil: {
+        name: "Nikhil",
+        img: "nikhil.jpg",
+        about: "Hey, I’m Nikhil! A UI/UX designer, I focus on bridging the gap between design and functionality to create intuitive user experiences.",
+        skills: ["Figma", "Adobe XD", "Branding", "User Research"],
+        email: "2420080064@klh.edu.in",
+        instagram: "https://www.instagram.com/nikhileswar._.reddy/?utm_source=qr&igsh=MXVxNDhkbnBodnQ3Yg%3D%3D#",
+        codechef: "https://www.codechef.com/users/nikhil242"
+      }
+    };
+
+    function showProfile(id) {
+      const person = profiles[id];
+      document.getElementById("profile-name").textContent = person.name;
+      document.getElementById("profile-img").src = person.img;
+      document.getElementById("profile-about").textContent = person.about;
+      document.getElementById("profile-skills").innerHTML = person.skills.map(skill => `<li>${skill}</li>`).join('');
+      document.getElementById("profile-email").textContent = person.email;
+      document.getElementById("profile-email").href = "mailto:" + person.email;
+      document.getElementById("profile-linkedin").href = person.linkedin;
+      document.getElementById("profile-instagram").href = person.instagram;
+      document.getElementById("profile-codechef").href = person.codechef;
+
+      document.getElementById("main-page").style.display = "none";
+      const profilePage = document.getElementById("profile-page");
+      profilePage.style.display = "block";
+      setTimeout(() => {
+        profilePage.classList.add("active");
+      }, 10);
+    }
+
+    function showMain() {
+      const profilePage = document.getElementById("profile-page");
+      profilePage.classList.remove("active");
+      setTimeout(() => {
+        profilePage.style.display = "none";
+        document.getElementById("main-page").style.display = "block";
+      }, 500);
+    }
+  </script>
+</body>
+</html>
